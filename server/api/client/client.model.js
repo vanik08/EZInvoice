@@ -8,4 +8,5 @@ var ClientSchema = new Schema({
   info: String,
   active: Boolean
 });
+
 module.exports = mongoose.model('Client', ClientSchema);
