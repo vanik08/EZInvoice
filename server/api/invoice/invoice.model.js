@@ -4,9 +4,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var InvoiceSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+  client: String,
+  date: Date,
+  entries: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);

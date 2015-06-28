@@ -33,6 +33,21 @@ exports.create = function (req, res, next) {
     res.json({ token: token });
   });
 };
+/** 
+  TODO
+  Get all invoices by client name
+  */
+exports.searchByClient = function (req, res, next) {
+
+}
+
+/** 
+  TODO
+  Get all invoices by invoice id
+  */
+exports.searchByInvoice = function (req, res, next) {
+
+}
 
 /**
  * Get a single user

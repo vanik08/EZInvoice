@@ -8,6 +8,7 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 var UserSchema = new Schema({
   name: String,
   email: { type: String, lowercase: true },
+  invoices: [Schema.Types.ObjectId],
   role: {
     type: String,
     default: 'user'
