@@ -42,6 +42,19 @@ exports.update = function(req, res) {
   });
 };
 
+// Add an Entry to existing invoice in DB.
+exports.addEntry = function(req, res) {
+  Invoice.findByIdAndUpdate(
+    [req.params.id],
+    {$push: {"entries": req.params.entryId}},
+    {safe: true, upsert: true, new: true},
+    function(err, invoice) {
+      if (err) { return handleError(res, err); }
+      res.json(200, invoice);
+    }
+  );
+}
+
 // Deletes a invoice from the DB.
 exports.destroy = function(req, res) {
   Invoice.findById(req.params.id, function (err, invoice) {

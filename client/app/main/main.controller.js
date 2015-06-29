@@ -1,10 +1,14 @@
 (function() {
   'use strict'
-  angular.module('ezinvoiceApp')
-    .controller('MainCtrl', function (socket) {
+
+  angular
+    .module('ezinvoiceApp')
+    .controller('MainCtrl', MainCtrl);
+
+    function MainCtrl(socket) {
       var vm = this;
       vm.m = 'Test of vm.m';
-    });
+    }
 })();
 
 // 'use strict';
