@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var InvoiceSchema = new Schema({
   client: String,
   date: Date,
-  entries: [Schema.Types.ObjectId]
+  entries: [{ type: Schema.Types.ObjectId, ref: 'Entry'}],
+  total: Number
 });
 
 module.exports = mongoose.model('Invoice', InvoiceSchema);

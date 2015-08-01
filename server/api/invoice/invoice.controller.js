@@ -5,7 +5,7 @@ var Invoice = require('./invoice.model');
 
 // Get list of invoices
 exports.index = function(req, res) {
-  Invoice.find(function (err, invoices) {
+  Invoice.find().populate('entries').exec(function (err, invoices) {
     if(err) { return handleError(res, err); }
     return res.json(200, invoices);
   });
