@@ -12,11 +12,18 @@
 		.module('ezinvoiceApp')
 		.controller('HomeCtrl', HomeCtrl)
 
-	function HomeCtrl(Ajax) {
+	function HomeCtrl(Ajax, $scope) {
+		//jshint validthis=true
 		var vm = this;
+
+		vm.setInvoice = setInvoice;
 
 		Ajax.getInvoices(function (data) {
 			vm.m = data;
 		});
+		
+		function setInvoice(invoice) {
+			$scope.$parent.currentInvoice = invoice;
+		}
 	}
 })();

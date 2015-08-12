@@ -1,0 +1,10 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="col-md-12">
+<p>Client: {{InvoiceCtrl.invoice.client}}</p>
+<p>Date: {{InvoiceCtrl.invoice.date}}</p>
+<p>Total: {{InvoiceCtrl.invoice.total}}</p>
+<ul ng-repeat="entry in InvoiceCtrl.invoice.entries">
+	<li>{{entry}}</li>
+</ul>
+
+</div>

@@ -1,5 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="col-md-12">
 	<ul ng-repeat="m in HomeCtrl.m">
-		<li>{{m}}</li>
+		<li><a ui-sref="invoice({id : m._id})" ng-click="HomeCtrl.setInvoice(m)">{{m.client}}</a></li>
 </div>

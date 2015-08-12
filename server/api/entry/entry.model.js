@@ -8,6 +8,8 @@ var EntrySchema = new Schema({
   client: String,
   rate: Number,
   hours: Number,
+  startTime: Date,
+  endTime: Date,
   total: Number,
   tax: Number,
   date: Date,
