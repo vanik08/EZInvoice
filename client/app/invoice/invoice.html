@@ -4,7 +4,7 @@
 <p>Date: {{InvoiceCtrl.invoice.date}}</p>
 <p>Total: {{InvoiceCtrl.invoice.total}}</p>
 
-<div id="invoice-table-container" class="col-md-12">
+<div id="invoice-table-container" class="col-md-12 col-xs-12">
 	<table class="table table-hover table-bordered">
 	<thead>
 		<tr>
@@ -22,13 +22,13 @@
     <tr>
       <form name="new-invoice">
         <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputJob"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputHours"></input></div></th>
+        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputHours" ng-change="InvoiceCtrl.updateTotal()"></input></div></th>
         <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputTimeStarted"></input></div></th>
         <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputTimeEnded"></input></div></th>
         <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputNotes"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputRate"></input></div></th>
+        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputRate" ng-change="InvoiceCtrl.updateTotal()"></input></div></th>
         <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputTax" required></input></div></th>
-        <th><button class="btn btn-success"><i class="fa fa-plus"/> {{ InvoiceCtrl.inputTotal }}</button></th>
+        <th><button class="btn btn-success"><i class="fa fa-plus"/> {{ InvoiceCtrl.inputTotal | currency }}</button></th>
       </form>
     </tr>
     <tr ng-repeat="entry in InvoiceCtrl.invoice.entries track by $index">

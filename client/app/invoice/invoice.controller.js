@@ -17,6 +17,7 @@
 		var vm = this;
 		vm.invoice = $scope.$parent.currentInvoice;
     vm.loadInvoice = loadInvoice;
+    vm.updateTotal = updateTotal;
 
     vm.inputJob;
     vm.inputHours;
@@ -25,13 +26,7 @@
     vm.inputNotes;
     vm.inputRate;
     vm.inputTax;
-    vm.inputTotal;
-
-    $scope.$watch('vm.inputRate', function (current) {
-      vm.inputTotal = current || 0;
-      console.log('watched');
-      debugger;
-    });
+    vm.inputTotal = 0;
 
     vm.loadInvoice();
 
@@ -39,7 +34,6 @@
   		//When URL is not re-directed and the parent scope is empty,
   		//such as the page being refreshed, request and find the invoice
   		if(vm.invoice == undefined) {
-  			console.warn('undefined');
   			Ajax.getInvoices(function (data) {
   				data.forEach(function (item) {
   					if(item._id === $stateParams.id) {
@@ -48,6 +42,12 @@
   				})
   			});
   		}
+    }
+    function updateTotal() {
+      if(vm.inputRate >= 1 && vm.inputHours >= 1)
+        vm.inputTotal = vm.inputRate*vm.inputHours;
+      else 
+        vm.inputTotal = 0;
     }
 	}
 })();
