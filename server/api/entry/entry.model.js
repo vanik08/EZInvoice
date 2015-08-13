@@ -12,7 +12,6 @@ var EntrySchema = new Schema({
   endTime: Date,
   total: Number,
   tax: Number,
-  date: Date,
   notes: String
 });
 
