@@ -1,4 +1,19 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <form>
+      <div class="form-group">
+        <label for="inputClient">Client</label>
+        <input type="text" class="form-control" id="inputClient" placeholder="Client" ng-model="HomeCtrl.inputClient">
+      </div>
+      <button type="submit" class="btn btn-primary" ng-click="HomeCtrl.createInvoice()">
+        <i class="fa fa-plus"/> Create Invoice
+      </button>
+    </form>
+  </div>
+  <div class="col-md-3"></div>
+</div>
 <div class="col-md-12">
 	<ul ng-repeat="m in HomeCtrl.m">
 		<li><a ui-sref="invoice({id : m._id})" ng-click="HomeCtrl.setInvoice(m)">{{m.client}}</a></li>

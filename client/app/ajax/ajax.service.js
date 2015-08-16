@@ -7,6 +7,7 @@
 
     function Ajax($http) {
       var service = {
+        createInvoice : createInvoice,
         getInvoices : getInvoices,
         getInvoice  : getInvoice,
         updateInvoice : updateInvoice,
@@ -15,6 +16,19 @@
       }
       return service;
       ////////////////////////////////////
+      function createInvoice(client, callback) {
+        var invoice = {
+          client : client,
+          date   : new Date(),
+          total  : 0
+        }
+        $http.post('http://localhost:9000/api/invoices', invoice).
+          then(function(res) {
+            callback(res.data);
+          }, function(res) {
+            console.error('Could not create new invoice.');
+          });
+      }
       function getInvoices(callback) {
         $http.get('http://localhost:9000/api/invoices').
           then(function (res) {

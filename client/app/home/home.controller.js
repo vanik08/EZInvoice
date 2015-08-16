@@ -17,13 +17,23 @@
 		var vm = this;
 
 		vm.setInvoice = setInvoice;
+		vm.createInvoice = createInvoice;
+		vm.inputClient;
 
-		Ajax.getInvoices(function (data) {
-			vm.m = data;
-		});
+		getInvoices();
 		
+		function getInvoices() {
+			Ajax.getInvoices(function (data) {
+				vm.m = data;
+			});
+		}
 		function setInvoice(invoice) {
 			$scope.$parent.currentInvoice = invoice;
+		}
+		function createInvoice() {
+			Ajax.createInvoice(vm.inputClient, function (data) {
+				getInvoices();
+			});
 		}
 	}
 })();

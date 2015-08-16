@@ -3,12 +3,12 @@
   <div class="row">
     <div class="col-md-12">
       <p>Client: {{InvoiceCtrl.invoice.client}}</p>
-      <p>Date: {{InvoiceCtrl.invoice.date}}</p>
+      <p>Date: {{InvoiceCtrl.invoice.date | date}}</p>
       <p>Total: {{InvoiceCtrl.invoice.total | currency}}</p>
     </div>
   </div>
 
-<button class="btn btn-primary" ng-click="InvoiceCtrl.toggleNewInvoiceDialog()">Add New Invoice</button>
+<button class="btn btn-primary" ng-click="InvoiceCtrl.toggleNewInvoiceDialog()">Add New Job</button>
 
 <div class="row">
   <div class="col-md-2"></div>
