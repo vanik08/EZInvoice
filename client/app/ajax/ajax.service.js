@@ -8,11 +8,11 @@
     function Ajax($http) {
       var service = {
         createInvoice : createInvoice,
-        getInvoices : getInvoices,
-        getInvoice  : getInvoice,
+        getInvoices   : getInvoices,
+        getInvoice    : getInvoice,
         updateInvoice : updateInvoice,
-        createEntry : createEntry,
-        addEntry    : addEntry
+        createEntry   : createEntry,
+        addEntry      : addEntry
       }
       return service;
       ////////////////////////////////////
@@ -46,7 +46,6 @@
           });
       }
       function updateInvoice(invoiceId, invoice, callback) {
-        debugger;
         $http.put('http://localhost:9000/api/invoices/'+invoiceId, invoice).
           then(function(res) {
             callback(res.data);

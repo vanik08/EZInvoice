@@ -37,20 +37,14 @@
   		//When URL is not re-directed and the parent scope is empty,
   		//such as the page being refreshed, request and find the invoice
   		if(vm.invoice == undefined) {
-        var invoiceId = $stateParams.id;
-  			Ajax.getInvoice(invoiceId, function (data) {
-          console.log(data);
-  				vm.invoice = data;
-  			});
+        refreshInvoice();
   		}
     }
     function refreshInvoice() {
-      Ajax.getInvoices(function (data) {
-        data.forEach(function (item) {
-          if(item._id === $stateParams.id) {
-            vm.invoice = item;
-          }
-        })
+      var invoiceId = $stateParams.id;
+      Ajax.getInvoice(invoiceId, function (data) {
+        console.log(data);
+        vm.invoice = data;
       });
     }
     function updateInvoice() {
