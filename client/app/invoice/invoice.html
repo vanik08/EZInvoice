@@ -1,48 +1,76 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="col-md-12">
-<p>Client: {{InvoiceCtrl.invoice.client}}</p>
-<p>Date: {{InvoiceCtrl.invoice.date}}</p>
-<p>Total: {{InvoiceCtrl.invoice.total}}</p>
+<div id="invoice-container" class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <p>Client: {{InvoiceCtrl.invoice.client}}</p>
+      <p>Date: {{InvoiceCtrl.invoice.date}}</p>
+      <p>Total: {{InvoiceCtrl.invoice.total | currency}}</p>
+    </div>
+  </div>
 
-<div id="invoice-table-container" class="col-md-12 col-xs-12">
-	<table class="table table-hover table-bordered">
-	<thead>
-		<tr>
-			<th>Job</th>
-			<th>Hours</th>
-			<th>Job Started</th>
-			<th>Job Ended</th>
-			<th>Notes</th>
-			<th>Rate</th>
-			<th>Tax</th>
-			<th>Total</th>
-		</tr>
-	</thead>
-  <tbody>
-    <tr>
-      <form name="new-invoice">
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputJob"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputHours" ng-change="InvoiceCtrl.updateTotal()"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputTimeStarted"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputTimeEnded"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputNotes"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputRate" ng-change="InvoiceCtrl.updateTotal()"></input></div></th>
-        <th><div class="input-group"><input type="text" class="form-control" ng-model="InvoiceCtrl.inputTax" required></input></div></th>
-        <th><button class="btn btn-success"><i class="fa fa-plus"/> {{ InvoiceCtrl.inputTotal | currency }}</button></th>
-      </form>
-    </tr>
-    <tr ng-repeat="entry in InvoiceCtrl.invoice.entries track by $index">
-      <td>{{entry.job}}</td>
-      <td>{{entry.hours}}</td>
-      <td>{{entry.timeStarted}}</td>
-      <td>{{entry.timeEnded}}</td>
-      <td>{{entry.notes}}</td>
-      <td>{{entry.rate | currency }}</td>
-      <td>{{entry.tax}}</td>
-      <td>{{entry.total | currency }}</td>
-    </tr>
-  </tbody>
-	</table>
+<button class="btn btn-primary" ng-click="InvoiceCtrl.toggleNewInvoiceDialog()">Add New Invoice</button>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <form ng-show="InvoiceCtrl.showNewInvoiceDialog">
+      <div class="form-group">
+        <label for="inputJob">Job</label>
+        <input type="text" class="form-control" id="inputJob" placeholder="Job" ng-model="InvoiceCtrl.inputJob">
+      </div>
+      <div class="form-group">
+        <label for="inputHours">Hours</label>
+        <input type="number" class="form-control" id="inputHours" placeholder="Hours" ng-model="InvoiceCtrl.inputHours" ng-change="InvoiceCtrl.updateTotal()">
+      </div>
+      <div class="form-group">
+        <label for="inputTimeStarted">Time Started</label>
+        <input type="datetime-local" class="form-control" id="inputTimeStarted" placeholder="Time Started" ng-model="InvoiceCtrl.inputTimeStarted">
+      </div>
+      <div class="form-group">
+        <label for="inputTimeEnded">Time Ended</label>
+        <input type="datetime-local" class="form-control" id="inputTimeEnded" placeholder="Time Ended" ng-model="InvoiceCtrl.inputTimeEnded">
+      </div>
+      <div class="form-group">
+        <label for="inputNotes">Notes</label>
+        <input type="text-area" class="form-control" id="inputNotes" placeholder="Notes" ng-model="InvoiceCtrl.inputNotes">
+      </div>
+      <div class="form-group">
+        <label for="inputRate">Rate</label>
+        <input type="number" class="form-control" id="inputRate" placeholder="Rate" ng-model="InvoiceCtrl.inputRate" ng-change="InvoiceCtrl.updateTotal()">
+      </div>
+      <button type="submit" class="btn btn-success" ng-click="InvoiceCtrl.createEntry()">
+        <i class="fa fa-plus"/> {{ InvoiceCtrl.inputTotal | currency }}
+      </button>
+    </form>
+  </div>
+  <div class="col-md-2"></div>
 </div>
-
+  <div id="invoice-table-container" class="col-md-12 col-xs-12">
+  	<table class="table table-hover table-bordered">
+  	<thead>
+  		<tr>
+  			<th>Job</th>
+  			<th>Hours</th>
+  			<th>Job Started</th>
+  			<th>Job Ended</th>
+  			<th>Notes</th>
+  			<th>Rate</th>
+  			<th>Tax</th>
+  			<th>Total</th>
+  		</tr>
+  	</thead>
+    <tbody>
+      <tr ng-repeat="entry in InvoiceCtrl.invoice.entries track by $index">
+        <td>{{entry.job}}</td>
+        <td>{{entry.hours}}</td>
+        <td>{{entry.timeStarted}}</td>
+        <td>{{entry.timeEnded}}</td>
+        <td>{{entry.notes}}</td>
+        <td>{{entry.rate | currency }}</td>
+        <td>{{entry.tax}}</td>
+        <td>{{entry.total | currency }}</td>
+      </tr>
+    </tbody>
+  	</table>
+  </div>
 </div>

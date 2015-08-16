@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 
 // Get a single invoice
 exports.show = function(req, res) {
-  Invoice.findById(req.params.id, function (err, invoice) {
+  Invoice.findById(req.params.id).populate('entries').exec(function (err, invoice) {
     if(err) { return handleError(res, err); }
     if(!invoice) { return res.send(404); }
     return res.json(invoice);

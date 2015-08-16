@@ -18,6 +18,9 @@
 		vm.invoice = $scope.$parent.currentInvoice;
     vm.loadInvoice = loadInvoice;
     vm.updateTotal = updateTotal;
+    vm.showNewInvoiceDialog = false;
+    vm.toggleNewInvoiceDialog = toggleNewInvoiceDialog;
+    vm.createEntry = createEntry;
 
     vm.inputJob;
     vm.inputHours;
@@ -34,20 +37,59 @@
   		//When URL is not re-directed and the parent scope is empty,
   		//such as the page being refreshed, request and find the invoice
   		if(vm.invoice == undefined) {
-  			Ajax.getInvoices(function (data) {
-  				data.forEach(function (item) {
-  					if(item._id === $stateParams.id) {
-  						vm.invoice = item;
-  					}
-  				})
+        var invoiceId = $stateParams.id;
+  			Ajax.getInvoice(invoiceId, function (data) {
+          console.log(data);
+  				vm.invoice = data;
   			});
   		}
+    }
+    function refreshInvoice() {
+      Ajax.getInvoices(function (data) {
+        data.forEach(function (item) {
+          if(item._id === $stateParams.id) {
+            vm.invoice = item;
+          }
+        })
+      });
+    }
+    function updateInvoice() {
+      var invoice = {
+        total : vm.inputTotal+vm.invoice.total
+      }
+      Ajax.updateInvoice(vm.invoice._id, invoice, function (data) {
+        console.log(data);
+        vm.invoice = data;
+        refreshInvoice;
+      });
     }
     function updateTotal() {
       if(vm.inputRate >= 1 && vm.inputHours >= 1)
         vm.inputTotal = vm.inputRate*vm.inputHours;
       else 
         vm.inputTotal = 0;
+    }
+    function toggleNewInvoiceDialog() {
+      vm.showNewInvoiceDialog = !vm.showNewInvoiceDialog;
+    }
+    function createEntry() {
+      var entry = {
+        job       :  vm.inputJob,
+        rate      :  vm.inputRate,
+        hours     :  vm.inputHours,
+        startTime :  vm.inputTimeStarted,
+        endTime   :  vm.inputTimeEnded,
+        total     :  vm.inputTotal,
+        notes     :  vm.inputNotes
+      }
+      Ajax.createEntry(entry, function (data) {
+        Ajax.addEntry(vm.invoice._id, data._id, function (data) {
+          console.log(data);
+          refreshInvoice();
+          vm.showNewInvoiceDialog = false;
+        });
+      });
+      updateInvoice();
     }
 	}
 })();

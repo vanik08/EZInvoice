@@ -5,13 +5,11 @@ var mongoose = require('mongoose'),
 
 var EntrySchema = new Schema({
   job: String,
-  client: String,
   rate: Number,
   hours: Number,
   startTime: Date,
   endTime: Date,
   total: Number,
-  tax: Number,
   notes: String
 });
 
